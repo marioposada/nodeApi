@@ -102,6 +102,56 @@ app.delete('/api/v1/tours/:id', (req, res) => {
   });
 });
 
+// Funciones para manejar los usuarios
+
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined',
+  });
+};
+const getUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined',
+  });
+};
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined',
+  });
+};
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined',
+  });
+};
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined',
+  });
+};
+
+
+
+// Tours Router
+app.use('/api/v1/tours', tourRouter);
+
+const tourRouter = express.Router();
+
+tourRouter.route('/').get(getAllTours).post(createTour);
+
+tourRouter
+  .route('/:id')
+  .get(getTour)
+  .patch(updateTour)
+  .delete(deleteTour);
+
+  
+  // Users Router
 app.route('/api/v1/users').get(getAllUsers).post(createUser);
 
 app
