@@ -10,38 +10,41 @@ const app = express();
 
 // 1) MIDDLEWARES
 app.use(morgan('dev'));
-
 app.use(express.json());
 
 
 
 
 
-// Retornar todos los tours
-app.get('/api/v1/tours', getAllTours);
+// // Retornar todos los tours
+// app.get('/api/v1/tours', getAllTours);
 
-// Retornar un tour
-app.get('/api/v1/tours/:id', getTour);
+// // Retornar un tour
+// app.get('/api/v1/tours/:id', getTour);
 
-// Crear un nuevo tour
-app.post('/api/v1/tours', createTour);
+// // Crear un nuevo tour
+// app.post('/api/v1/tours', createTour);
 
-// Actualizar un tour
-app.patch('/api/v1/tours/:id', updateTour);
+// // Actualizar un tour
+// app.patch('/api/v1/tours/:id', updateTour);
 
-// Eliminar un tour
-app.delete('/api/v1/tours/:id', deleteTour);
-
-// Funciones para manejar los usuarios
+// // Eliminar un tour
+// app.delete('/api/v1/tours/:id', deleteTour);
 
 
 
-// Tours Router
 
 
+
+
+// 3) ROUTES
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
+
+
+
+// 4) START SERVER
 
 const port = 3000;
 app.listen(port, () => {
