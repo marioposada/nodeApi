@@ -1,11 +1,11 @@
 const express = require('express');
+const fs = require('fs');
+
 const tours = JSON.parse(
     fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`, 'utf-8')
   );
   
-
-
-
+  
 const getAllTours = (req, res) => {
     res.status(200).json({
       status: 'success',
