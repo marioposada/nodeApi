@@ -1,4 +1,3 @@
-
 const express = require('express');
 const morgan = require('morgan');
 
@@ -14,39 +13,11 @@ app.use(express.json());
 
 
 
-
-
-// // Retornar todos los tours
-// app.get('/api/v1/tours', getAllTours);
-
-// // Retornar un tour
-// app.get('/api/v1/tours/:id', getTour);
-
-// // Crear un nuevo tour
-// app.post('/api/v1/tours', createTour);
-
-// // Actualizar un tour
-// app.patch('/api/v1/tours/:id', updateTour);
-
-// // Eliminar un tour
-// app.delete('/api/v1/tours/:id', deleteTour);
-
-
-
-
-
-
-
-// 3) ROUTES
-
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 
+module.exports = app;
 
 
-// 4) START SERVER
 
-const port = 3000;
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
-});
+
