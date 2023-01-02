@@ -6,13 +6,11 @@ const router = express.Router();
 router
 .param('id', tourController.checkID)
 
-router
-.param('/', tourController.Body)
 
 router
 .route('/')
 .get(tourController.getAllTours)
-.post(tourController.createTour);
+.post(tourController.Body,tourController.createTour);
 
 router
 .route('/:id')
