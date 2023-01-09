@@ -13,6 +13,22 @@ mongoose.connect(DB).then((con) => {
   console.log(con.connections);
 });
 
+const tourSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, 'A tour must have a name'],
+    unique: true,
+  },
+  rating: {
+    type: Number,
+    default: 4.5,
+  },
+  price: {
+    type: Number,
+    required: [true, 'A tour must have a price'],
+  },
+});
+
 const app = require('./app');
 
 // console.log(process.env.NODE_ENV);
