@@ -18,14 +18,4 @@ const tourSchema = new mongoose.Schema({
 
 const Tour = mongoose.model('Tour', tourSchema);
 
-const testTour = new Tour({
-  name: 'Comming Soon',
-  rating: 4.7,
-  price: 497,
-});
-
-testTour.save((err) => {
-  console.log('ERROR:', err);
-});
-
 module.exports = Tour;
