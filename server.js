@@ -8,11 +8,6 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD
 );
 
-mongoose.connect(DB).then((con) => {
-  console.log('DB connection successful!');
-  console.log(con.connections);
-});
-
 const tourSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -28,6 +23,27 @@ const tourSchema = new mongoose.Schema({
     required: [true, 'A tour must have a price'],
   },
 });
+
+async function connectDB() {
+  try {
+    mongoose.set('strictQuery', false);
+    await mongoose.connect(DB);
+    const Tour = mongoose.model('Tour', tourSchema);
+
+    const testTour = new Tour({
+      name: 'The Forest Hiker',
+      rating: 4.7,
+      price: 497,
+    });
+
+    testTour.save((err) => {
+      console.log('ERROtrtrtrtrtrR:', err);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+connectDB();
 
 const app = require('./app');
 
