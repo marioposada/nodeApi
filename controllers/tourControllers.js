@@ -1,8 +1,5 @@
 const fs = require('fs');
-
-const tours = JSON.parse(
-  fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`, 'utf-8')
-);
+const Tour = require('./../models/tourModel');
 
 exports.Body = (req, res, next) => {
   if (!req.body.name || !req.body.price) {
