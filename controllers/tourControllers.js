@@ -1,14 +1,6 @@
 const Tour = require('../models/tourModel');
 
-exports.getAllTours = (req, res) => {
-  // res.status(200).json({
-  //   status: 'success',
-  //   results: tours.length,
-  //   data: {
-  //     tours: tours,
-  //   },
-  // });
-};
+exports.getAllTours = (req, res) => {};
 
 exports.getTour = (req, res) => {
   // const id = req.params.id * 1; // *1 converts string to number
