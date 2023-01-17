@@ -14,6 +14,8 @@ exports.getAllTours = async (req, res) => {
     let query = Tour.find(JSON.parse(queryStr));
 
     // 3) Sorting
+    // api/v1/tours?sort=-price,-ratingsAverage
+
     if (req.query.sort) {
       let sortBy = req.query.sort.split(',').join(' ');
       query = query.sort(sortBy);
