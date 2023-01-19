@@ -4,22 +4,44 @@ exports.aliasTopTours = (req, res, next) => {
   req.query.limit = '5';
   req.query.sort = '-ratingsAverage,price';
   req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
-  console.log(req.query)
+
   next();
 };
 
-exports.getAllTours = async (req, res) => {
-  try {
-    // BUILD QUERY
-    // 1) Filtering
-    const queryObj = { ...req.query };
+class APIFeatures {
+  /*
+   * @param {Object} query - Mongoose query
+   * @param {Object} queryString - Express request query object
+   * */
+  constructor(query, queryString) {
+    this.query = query;
+    this.queryString = queryString;
+  }
+
+  filter() {
+    const queryObj = { ...this.queryString };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
     excludedFields.forEach((el) => delete queryObj[el]);
 
     // 2) Advanced filtering
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
-    let query = Tour.find(JSON.parse(queryStr));
+    this.query.find(JSON.parse(queryStr));
+  }
+}
+
+exports.getAllTours = async (req, res) => {
+  try {
+    // BUILD QUERY
+    // 1) Filtering
+    // const queryObj = { ...req.query };
+    // const excludedFields = ['page', 'sort', 'limit', 'fields'];
+    // excludedFields.forEach((el) => delete queryObj[el]);
+
+    // // 2) Advanced filtering
+    // let queryStr = JSON.stringify(queryObj);
+    // queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+    // let query = Tour.find(JSON.parse(queryStr));
 
     // 3) Sorting
     // api/v1/tours?sort=-price,-ratingsAverage
@@ -53,7 +75,8 @@ exports.getAllTours = async (req, res) => {
     }
 
     // EXECUTE QUERY
-    const tours = await query;
+    const features = new APIFeatures(Tour.find(), req.query).filter();
+    const tours = await features.query;
 
     res.status(200).json({
       status: 'success',
