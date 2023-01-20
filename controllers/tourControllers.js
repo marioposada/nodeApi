@@ -118,6 +118,12 @@ exports.getTourStats = async (req, res) => {
       {
         $match: { ratingsAverage: { $gte: 4.5 } },
       },
+      {
+        $group: {
+          _id: null,
+          avgRating: { $avg: '$ratingsAverage' },
+        },
+      },
     ]);
   } catch (err) {
     res.status(404).json({
