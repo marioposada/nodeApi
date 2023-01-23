@@ -14,7 +14,7 @@ exports.aliasTopTours = (req, res, next) => {
   next();
 };
 
-exports.getAllTours = async (req, res) => {
+exports.getAllTours = async (req, res,next) => {
   try {
     console.log(req.query);
     // EXECUTE QUERY
@@ -40,7 +40,7 @@ exports.getAllTours = async (req, res) => {
   }
 };
 
-exports.getTour = async (req, res) => {
+exports.getTour = async (req, res,next) => {
   try {
     const tour = await Tour.findById(req.params.id);
     res.status(200).json({
@@ -74,7 +74,7 @@ exports.createTour = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.updateTour = async (req, res) => {
+exports.updateTour = async (req, res, next) => {
   try {
     const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -94,7 +94,7 @@ exports.updateTour = async (req, res) => {
   }
 };
 
-exports.deleteTour = async (req, res) => {
+exports.deleteTour = async (req, res, next) => {
   try {
     const tour = await Tour.findByIdAndDelete(req.params.id);
     res.status(204).json({
@@ -111,7 +111,7 @@ exports.deleteTour = async (req, res) => {
   }
 };
 
-exports.getTourStats = async (req, res) => {
+exports.getTourStats = async (req, res, next) => {
   try {
     const stats = await Tour.aggregate([
       {
@@ -149,7 +149,7 @@ exports.getTourStats = async (req, res) => {
   }
 };
 
-exports.getMonthlyPlan = async (req, res) => {
+exports.getMonthlyPlan = async (req, res, next) => {
   try {
     const year = req.params.year * 1;
     const plan = await Tour.aggregate([
