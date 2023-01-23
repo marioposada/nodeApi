@@ -54,6 +54,11 @@ const tourSchema = new mongoose.Schema({
   startDates: [Date],
 });
 
+tourSchema.pre('save', function (next) {
+  console.log(this);
+  next();
+});
+
 const Tour = mongoose.model('Tour', tourSchema);
 
 module.exports = Tour;
