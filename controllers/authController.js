@@ -33,11 +33,14 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // 2) Check if user exists && password is correct
-  const user = User.findOne({ email }).select('+password');
+  const user = await User.findOne({ email }).select('+password');
 
   const token = 'jsjsjs';
   res.status(200).json({
     status: 'success',
-    token,
+    data: {
+      token,
+      user,
+    },
   });
 });

@@ -1,19 +1,17 @@
-const Tour = require('../models/tourModel');
+const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 
-
-
-exports.getAllUsers = (req, res) => {
-  const tours = await features.query;
+exports.getAllUsers = catchAsync(async (req, res) => {
+  const users = await User.find();
 
   res.status(200).json({
     status: 'success',
-    results: tours.length,
+    results: users.length,
     data: {
-      tours: tours,
+      users,
     },
   });
-
+});
 
 exports.getUser = (req, res) => {
   res.status(500).json({
