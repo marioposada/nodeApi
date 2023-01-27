@@ -37,7 +37,10 @@ const userSchema = new mongoose.Schema({
     },
   },
 });
-
+/*
+ * This is a Mongoose middleware that will run before the save() and create() methods
+ * This will not run on update() or findByIdAndUpdate()
+ */
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
 
